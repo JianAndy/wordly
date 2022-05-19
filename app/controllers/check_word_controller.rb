@@ -1,0 +1,3 @@
+class CheckWordController < ApplicationController
+
+end
