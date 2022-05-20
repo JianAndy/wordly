@@ -1,9 +1,14 @@
-<%= form_with url: "/xxx", method: :get do |form| %>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.text_area :word, size: "10x1" %><br>
-  <%= form.submit "Check & Next " %>
-<% end %>
+
+<div class="card" style="width: 10rem;">
+  <ul class="list-group list-group-flush">
+    <%= form_with url: "/xxx", method: :get do |form| %>
+    <li class="list-group-item"><%= form.text_area :word1, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word2, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word3, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word4, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word5, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word6, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.submit "Check & Next " %></li>
+    <% end %>
+  </ul>
+</div>
