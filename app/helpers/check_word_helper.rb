@@ -1,0 +1,2 @@
+module CheckWordHelper
+end
