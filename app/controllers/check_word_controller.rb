@@ -1,5 +1,8 @@
 class CheckWordController < ApplicationController
     def index
-       # data = File.read("/words/words.txt")
     end
+
+    def check_words
+        @words = params
+     end
 end
