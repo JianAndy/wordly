@@ -1,0 +1,20 @@
+
+<div class="card" style="width: 10rem;">
+  <ul class="list-group list-group-flush">
+
+    <%= form_with url: "/check_words", method: :get do |form| %>
+
+    <li class="list-group-item"><%= form.text_area :word1, size: "10x1" %></li> 
+    <li class="list-group-item"><%= form.text_area :word2, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word3, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word4, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word5, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.text_area :word6, size: "10x1" %></li>
+    <li class="list-group-item"><%= form.submit "Check" %></li>
+    <% end %>
+  </ul>
+
+
+ 
+
+</div>
