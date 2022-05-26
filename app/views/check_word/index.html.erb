@@ -4,12 +4,12 @@
 
     <%= form_with url: "/check_word", method: :get do |form| %>
 
-    <li class="list-group-item"><%= form.text_area :word1, size: "10x1" %></li> <p><%= @words[:word1] %></p>
-    <li class="list-group-item"><%= form.text_area :word2, size: "10x1" %></li> <p><%= @words[:word2] %></p>
-    <li class="list-group-item"><%= form.text_area :word3, size: "10x1" %></li> <p><%= @words[:word3] %></p>
-    <li class="list-group-item"><%= form.text_area :word4, size: "10x1" %></li> <p><%= @words[:word4] %></p>
-    <li class="list-group-item"><%= form.text_area :word5, size: "10x1" %></li> <p><%= @words[:word5] %></p>
-    <li class="list-group-item"><%= form.text_area :word6, size: "10x1" %></li> <p><%= @words[:word6] %></p>
+    <li class="list-group-item"><%= form.text_field :word1, size: "10x1" %></li> <p><%= @words[:word1] %></p>
+    <li class="list-group-item"><%= form.text_field :word2, size: "10x1" %></li> <p><%= @words[:word2] %></p>
+    <li class="list-group-item"><%= form.text_field :word3, size: "10x1" %></li> <p><%= @words[:word3] %></p>
+    <li class="list-group-item"><%= form.text_field :word4, size: "10x1" %></li> <p><%= @words[:word4] %></p>
+    <li class="list-group-item"><%= form.text_field :word5, size: "10x1" %></li> <p><%= @words[:word5] %></p>
+    <li class="list-group-item"><%= form.text_field :word6, size: "10x1" %></li> <p><%= @words[:word6] %></p>
     <li class="list-group-item"><%= form.submit "Check" %></li>
     <% end %>
   </ul>
