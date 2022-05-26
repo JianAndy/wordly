@@ -1,15 +1,20 @@
+<pre>
+<%= pp @debug_me %>
+</pre>
+
 
 <div class="card" style="width: 10rem;">
   <ul class="list-group list-group-flush">
 
     <%= form_with url: "/check_word", method: :get do |form| %>
 
-    <li class="list-group-item"><%= form.text_field :word1, maxlength: "5", value: @words[:word1], readonly: @words[:word1] != '' %></li>
-    <li class="list-group-item"><%= form.text_field :word2, maxlength: "5", value: @words[:word2], readonly: @words[:word2] != '' %></li>
-    <li class="list-group-item"><%= form.text_field :word3, maxlength: "5", value: @words[:word3], readonly: @words[:word3] != '' %></li>
-    <li class="list-group-item"><%= form.text_field :word4, maxlength: "5", value: @words[:word4], readonly: @words[:word4] != '' %></li>
-    <li class="list-group-item"><%= form.text_field :word5, maxlength: "5", value: @words[:word5], readonly: @words[:word5] != '' %></li>
-    <li class="list-group-item"><%= form.text_field :word6, maxlength: "5", value: @words[:word6], readonly: @words[:word6] != '' %></li>
+      <% @submitted_word_symbols.each do |word_symbol| %>
+        <p><%= @words[word_symbol] %></p>
+        <%= form.hidden_field word_symbol, value: @words[word_symbol] %>
+      <% end %>
+
+    <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5" %></li>
+
     <li class="list-group-item"><%= form.submit "Check" %></li>
     <% end %>
   </ul>
