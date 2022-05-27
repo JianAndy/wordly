@@ -27,21 +27,28 @@ class CheckWordController < ApplicationController
     end
 
     def check_word
-        if @words[@submitted_word_symbols.last()] ==  nil
+        if last_submitted_word[:word] ==  nil
             'GUESS THE WORD'
-        elsif @words[@submitted_word_symbols.last()] ==  word_of_the_day
+        elsif last_submitted_word[:word] ==  word_of_the_day
             'YOU WON'
-        elsif @submitted_word_symbols.last() == :word6 && @words[@submitted_word_symbols.last()] !=  word_of_the_day
+        elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
             'LOSER'
         else
            'GUESS ANOTHER WORD'
         end
     end
 
+    def last_submitted_word
+        {
+            :word_nr => @submitted_word_symbols.last ,
+            :word => @words[@submitted_word_symbols.last]
+        }
+    end 
+
     def word_of_the_day
         file = File.open("#{Rails.root}/words/words.txt")
-        file_data = file.readlines.map(&:chomp)
-        the_word = file_data[(Time.new.year.to_s[2,3]).to_i + Date.today.yday()*25]
+        file_data = file.readlines.map { |line| line.chomp }
+        the_word = file_data[Time.new.year % 100 + Date.today.yday()*25]
 
         file.close
 
