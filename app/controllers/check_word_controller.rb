@@ -1,13 +1,13 @@
 class CheckWordController < ApplicationController
     WORD_SYMBOLS = [:word1, :word2, :word3, :word4, :word5, :word6]
-    WORD_OF_THE_DAY = "fight"
+    WORD_OF_THE_DAY = word_of_the_day
 
     def index
         @words = words
         @submitted_words_count = submitted_words_count
         @submitted_word_symbols = WORD_SYMBOLS.take(submitted_words_count)
         @next_word_symbol = WORD_SYMBOLS[submitted_words_count]
-        @debug_me = ''
+        @debug_me = WORD_OF_THE_DAY
         @check_word = check_word
     end
 
@@ -37,5 +37,17 @@ class CheckWordController < ApplicationController
            'GUESS ANOTHER WORD'
         end
     end
+
+    def word_of_the_day
+        file = File.open("#{Rails.root}/words/words.txt")
+        file_data = file.readlines.map(&:chomp)
+        the_word = file_data[rand(file_data.size())]
+
+        file.close
+
+        the_word
+    end 
+
+
 
 end
