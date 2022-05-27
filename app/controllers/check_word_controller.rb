@@ -41,7 +41,7 @@ class CheckWordController < ApplicationController
     def word_of_the_day
         file = File.open("#{Rails.root}/words/words.txt")
         file_data = file.readlines.map(&:chomp)
-        the_word = file_data[Date.today.yday()+27]
+        the_word = file_data[(Time.new.year.to_s[2,3]).to_i + Date.today.yday()*25]
 
         file.close
 
