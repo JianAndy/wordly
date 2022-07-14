@@ -1,4 +1,5 @@
 class CheckWordController < ApplicationController
+    helper_method :check_word_colouring
     WORD_SYMBOLS = [:word1, :word2, :word3, :word4, :word5, :word6]
     
     def index
@@ -9,6 +10,7 @@ class CheckWordController < ApplicationController
         @debug_me = word_of_the_day
         @word_of_the_day = word_of_the_day
         @check_word = check_word
+        
     end
 
     private
@@ -36,6 +38,26 @@ class CheckWordController < ApplicationController
         else
            'GUESS ANOTHER WORD'
         end
+    end
+
+    def check_word_colouring (correct_word, guess_word)
+        
+        colours = Array.new
+
+        guess_word.each_char.to_a.each_with_index do | letter, index|
+            if letter == correct_word[index]
+                colour = '#ccfecf;'
+            elsif correct_word.include? letter
+                colour = '#fef9cc;'
+            else
+                colour = '#ddd;'
+            end
+
+           colours.append(colour)
+        end
+        colours
+
+        ## '#ccfecf' -> green  '#fef9cc' -> yellow  '#ddd' ->  grey
     end
 
     def last_submitted_word

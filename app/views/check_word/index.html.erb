@@ -9,7 +9,14 @@
     <%= form_with url: "/check_word", method: :get do |form| %>
 
       <% @submitted_word_symbols.each do |word_symbol| %>
-        <p><%= @words[word_symbol] %></p>
+        <% colours = check_word_colouring(@word_of_the_day, @words[word_symbol]) %>
+        <% word = @words[word_symbol] %>
+        <p>
+        <% for n in 0..4 do  %>
+        <%=  content_tag(:span, word[n], :'style' => "background-color:#{colours[n]}"  )  %>
+        <% end %>        
+        </p>
+
         <%= form.hidden_field word_symbol, value: @words[word_symbol] %>
       <% end %>
 
