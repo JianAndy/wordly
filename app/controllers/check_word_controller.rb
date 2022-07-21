@@ -10,7 +10,7 @@ class CheckWordController < ApplicationController
         @debug_me = word_of_the_day
         @word_of_the_day = word_of_the_day
         @check_word = check_word
-        
+        @alphabet = alphabet        
     end
 
     private
@@ -31,30 +31,42 @@ class CheckWordController < ApplicationController
     def check_word
         if last_submitted_word[:word] ==  nil
             'GUESS THE WORD'
-        elsif last_submitted_word[:word] ==  word_of_the_day
+        elsif last_submitted_word[:word].upcase ==  word_of_the_day
             'YOU WON'
         elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
-            'LOSER'
+            'TRY ANOTHER DAY'
         else
            'GUESS ANOTHER WORD'
         end
+    end
+
+    def alphabet
+#        alphabet_array = [*'A '..'Z ']
+        rich_alphabet = Hash.new
+        ('A'..'Z').each { |letter| rich_alphabet.store(letter, "")}
+        rich_alphabet
     end
 
     def check_word_colouring (correct_word, guess_word)
         
         colours = Array.new
 
-        guess_word.each_char.to_a.each_with_index do | letter, index|
+        guess_word.each_char.to_a.each_with_index do |letter, index|
+            letter.upcase!
             if letter == correct_word[index]
                 colour = '#ccfecf;'
-            elsif correct_word.include? letter
+                @alphabet[letter] = colour
+            elsif correct_word.include?(letter)
                 colour = '#fef9cc;'
+                (@alphabet[letter] = colour) unless @alphabet[letter] == '#ccfecf;'
             else
                 colour = '#ddd;'
+                @alphabet[letter] = colour
             end
 
            colours.append(colour)
         end
+
         colours
 
         ## '#ccfecf' -> green  '#fef9cc' -> yellow  '#ddd' ->  grey
@@ -74,9 +86,7 @@ class CheckWordController < ApplicationController
         
         file.close
 
-        the_word
+        the_word.upcase!
     end 
-
-
 
 end

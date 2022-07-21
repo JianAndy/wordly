@@ -10,7 +10,8 @@
 
       <% @submitted_word_symbols.each do |word_symbol| %>
         <% colours = check_word_colouring(@word_of_the_day, @words[word_symbol]) %>
-        <% word = @words[word_symbol] %>
+        <% word = @words[word_symbol].upcase %>
+       
         <p>
         <% for n in 0..4 do  %>
         <%=  content_tag(:span, word[n], :'style' => "background-color:#{colours[n]}"  )  %>
@@ -29,6 +30,15 @@
   <%= @check_word %>
 
 
- 
-
 </div>
+<br>
+<br>
+
+        <p>
+        <% for letter,colour in @alphabet do  %>
+        <%=  content_tag(:span, letter, :'style' => "background-color:#{colour}"  )  %>
+        <% end %>        
+        </p>
+<br>
+<br>
+
