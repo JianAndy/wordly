@@ -9,9 +9,11 @@
     <%= form_with url: "/check_word", method: :get do |form| %>
 
       <% @submitted_word_symbols.each do |word_symbol| %>
+
         <% colours = check_word_colouring(@word_of_the_day, @words[word_symbol]) %>
+
         <% word = @words[word_symbol].upcase %>
-       
+
         <p>
         <% for n in 0..4 do  %>
         <%=  content_tag(:span, word[n], :'style' => "background-color:#{colours[n]}"  )  %>
@@ -20,10 +22,13 @@
 
         <%= form.hidden_field word_symbol, value: @words[word_symbol] %>
       <% end %>
-
-    <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5", minlength: "5", pattern: "^[a-zA-Z]+$" , oninvalid: "this.setCustomValidity('Please Enter 5 letter word')"%></li>
-
+      
+     <% if @check_word == 'GUESS THE WORD' || @check_word == 'GUESS ANOTHER WORD' %>
+    <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5", minlength: "5", pattern: /^(?:([A-Za-z])(?!.*\1))*$/ , oninvalid: "this.setCustomValidity('Enter a 5-unique-letter word')", oninput: "this.setCustomValidity('')" %></li>
     <li class="list-group-item"><%= form.submit "Check" %></li>
+     <% end %>
+
+    
     <% end %>
   </ul>
 
