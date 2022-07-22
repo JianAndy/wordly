@@ -41,17 +41,14 @@ class CheckWordController < ApplicationController
     end
 
     def alphabet
-#        alphabet_array = [*'A '..'Z ']
-        rich_alphabet = Hash.new
-        ('A'..'Z').each { |letter| rich_alphabet.store(letter, "")}
-        rich_alphabet
+        ('A'..'Z').to_h { |letter| [letter, ""] }
     end
 
     def check_word_colouring (correct_word, guess_word)
         
         colours = Array.new
 
-        guess_word.each_char.to_a.each_with_index do |letter, index|
+        guess_word.each_char.each_with_index do |letter, index|
             letter.upcase!
             if letter == correct_word[index]
                 colour = '#ccfecf;'
