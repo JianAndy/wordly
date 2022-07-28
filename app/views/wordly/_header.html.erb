@@ -1,5 +1,20 @@
+
+
 <nav class="nav">
 <%= link_to 'Home', root_path, class: "nav-link" %> 
 <%= link_to "Start Game", check_word_path, class:"nav-link" %>
+
+<% if session[:user_id].nil? %>
+    <%= link_to "Login", users_path, class:"nav-link disabled" %> 
+<% elsif %>
+    <%= link_to session[:user_id], users_path, class:"nav-link" %> 
+<% end %>
+
+<% flash.each do |_, message| %>
+  <div class=" alert alert-primary" role="alert">
+    <small><%= message %></small>
+  </div>
+<% end %>
+
 </nav>
 

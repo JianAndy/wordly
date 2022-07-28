@@ -10,7 +10,7 @@ class CheckWordController < ApplicationController
         @debug_me = word_of_the_day
         @word_of_the_day = word_of_the_day
         @check_word = check_word
-        @alphabet = alphabet        
+        @alphabet = alphabet      
     end
 
     private

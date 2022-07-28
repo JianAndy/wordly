@@ -1,0 +1,16 @@
+
+<% if session[:user_id]%>
+    <%= form_with url: "/users", method: :delete do |form| %>
+        <li class="list-group-item"><p>Do you wish to logout from <%= session[:user_id] %> ?</p>
+            <%= form.submit "Logout" %>
+        </li>
+    <% end %>
+
+<% elsif %>
+    <%= form_with url: "/users", method: :post do |form| %>
+        <li class="list-group-item"><%= form.text_field :user, minlength: "1" %> <%= form.submit "Login" %></li>
+    <% end %>
+
+<% end %>
+
+
