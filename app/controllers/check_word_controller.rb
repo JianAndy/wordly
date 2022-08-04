@@ -1,8 +1,9 @@
 class CheckWordController < ApplicationController
-    helper_method :check_word_colouring
+    helper_method :check_word_colouring, :destroy_game_session
     WORD_SYMBOLS = [:word1, :word2, :word3, :word4, :word5, :word6]
     
     def index
+        word_session
         @words = words
         @submitted_words_count = submitted_words_count
         @submitted_word_symbols = WORD_SYMBOLS.take(submitted_words_count)
@@ -19,13 +20,25 @@ class CheckWordController < ApplicationController
       words.select { |_, v| v != '' }.count
     end
 
-    def words
-        {:word1 => params["word1"] || "",
-        :word2 => params["word2"] || "",
-        :word3 => params["word3"] || "",
-        :word4 => params["word4"] || "",
-        :word5 => params["word5"] || "",
-        :word6 => params["word6"] || ""}
+    def destroy_game_session
+        WORD_SYMBOLS.each do | n |
+            session[n] = nil
+        end
+    end
+
+    def word_session
+        WORD_SYMBOLS.each do | n |
+            session[n] = params[n.to_s] if session[n].nil?
+        end
+    end 
+
+    def words                
+        {:word1 => session[:word1] || '' ,
+        :word2 => session[:word2] || ''  ,
+        :word3 => session[:word3] || ''  ,
+        :word4 => session[:word4] || ''  ,
+        :word5 => session[:word5] || ''  ,
+        :word6 => session[:word6] || ''  }
     end
 
     def check_word
