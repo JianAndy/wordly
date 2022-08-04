@@ -10,7 +10,7 @@ class CheckWordController < ApplicationController
         @debug_me = word_of_the_day
         @word_of_the_day = word_of_the_day
         @check_word = check_word
-        @alphabet = alphabet      
+        @alphabet = alphabet     
     end
 
     private
@@ -30,13 +30,13 @@ class CheckWordController < ApplicationController
 
     def check_word
         if last_submitted_word[:word] ==  nil
-            'GUESS THE WORD'
+            "GUESS THE WORD"
         elsif last_submitted_word[:word].upcase ==  word_of_the_day
-            'YOU WON'
+            "YOU WON"
         elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
-            'TRY ANOTHER DAY'
+            "TRY ANOTHER DAY"
         else
-           'GUESS ANOTHER WORD'
+           "GUESS ANOTHER WORD"
         end
     end
 
