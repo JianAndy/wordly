@@ -11,7 +11,8 @@ class CheckWordController < ApplicationController
         @debug_me = word_of_the_day
         @word_of_the_day = word_of_the_day
         @check_word = check_word
-        @alphabet = alphabet     
+        @alphabet = alphabet    
+        @one_game_per_day = one_game_per_day
     end
 
     private
@@ -45,8 +46,10 @@ class CheckWordController < ApplicationController
         if last_submitted_word[:word] ==  nil
             "GUESS THE WORD"
         elsif last_submitted_word[:word].upcase ==  word_of_the_day
+            session[:game_end_date] = Date.today
             "YOU WON"
         elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
+            session[:game_end_date] = Date.today
             "TRY ANOTHER DAY"
         else
            "GUESS ANOTHER WORD"
@@ -99,4 +102,19 @@ class CheckWordController < ApplicationController
         the_word.upcase!
     end 
 
+    def one_game_per_day
+        session[:game_end_date].to_date + 1.day != Date.tomorrow
+    end
 end
+
+#    def one_game_per_day
+#        @current_user = User.new(user: cookies[:user_id])
+#        @current_user = User.new(user_params)
+#        if params[:remember_date]
+#            cookies[:user_id] = @current_user.user
+#        if @check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY" && session[:user_id] == current_user
+#            render "wordly/index"
+#        else
+#
+#        end
+#    end
