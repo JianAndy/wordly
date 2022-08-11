@@ -13,6 +13,20 @@ class CheckWordController < ApplicationController
         @check_word = check_word
         @alphabet = alphabet    
         @one_game_per_day = one_game_per_day
+
+        #Saving games when logged in
+       if session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
+       @game 
+       @row = @submitted_word_symbols.last.to_s[4]
+
+        if @check_word == "YOU WON"
+            @game = Game.new(status: true, row: @row , user_id: session[:user_id])
+        elsif
+            @game = Game.new(status: false, row: @row , user_id: session[:user_id])
+        end
+        @game.save
+       end
+
     end
 
     private
