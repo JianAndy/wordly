@@ -103,7 +103,12 @@ class CheckWordController < ApplicationController
     end 
 
     def one_game_per_day
-        session[:game_end_date].to_date + 1.day != Date.tomorrow
+        if session[:game_end_date].nil?
+            true
+        else 
+            (session[:game_end_date].to_date + 1.day != Date.tomorrow)
+        end
+
     end
 end
 
