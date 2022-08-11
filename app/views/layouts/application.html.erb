@@ -14,6 +14,11 @@
 
   <body>
     <%= render "wordly/header" %>
-    <%= yield %>
+
+    <div class="card-deck">
+      <%= yield %>
+      <%= render "games/index" %>
+    </div>
+    
   </body>
 </html>

@@ -1,0 +1,24 @@
+<% if current_page?(:controller => 'check_word') %>
+    
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">SCORECARD</h5>
+      <p class="card-text">
+<!-- SCORECARD STARTS HERE  -->
+
+
+<% if session[:user_id] %>
+  <p>you're logged and we'll show you the scorecard<p>
+<% elsif %>  
+  <p>you're not logged in</p>
+<% end %>
+
+<!-- SCORECARD ENDS HERE  -->
+      </p>
+      <p class="card-text"><small class="text-muted"></small></p>
+    </div>
+</div>
+
+
+
+<% end%>

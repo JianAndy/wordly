@@ -1,10 +1,12 @@
-<h1 style="background-color:#eee;float:left;padding:10px;width:270px;height:550px;margin-bottom:20px;margin-right:20px;display:inline-block">Wordly game!</h1>
-<p style="color:#888;float:left;">Do you want to play some super amazing, perfect, incredible WORDLY game?</p>
-<br><br>
-<%= link_to "Start GAME" , check_word_path %>
-<br>
 
-<div style="white-space:pre">
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Wordly game!</h5>
+      <p class="card-text">
+        <p style="color:#888;">Do you want to play some super amazing, perfect, incredible WORDLY game?</p>
+        <p><%= link_to "Start GAME" , check_word_path %></p>
+
+        <div style="white-space:pre">
     <b>HOW TO PLAY</b>
 
     Guess the correct word in 6 tries.
@@ -28,3 +30,8 @@
 <b> Next Puzzle: </b><%= @time_till_next_game%>
 <br>
 </pre>
+
+
+        </p>
+    </div>
+</div>
