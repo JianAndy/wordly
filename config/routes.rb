@@ -4,10 +4,12 @@ Rails.application.routes.draw do
 
   get "/wordly", to: "wordly#index"
   get "/check_word", to: "check_word#index"
-  
+
   get "/logout", to: "users#destroy"
 
-  resources :users
+  resources :users do
+    resources :games
+  end
 
   #get "/users", to: "users#index"
   #post "/users", to: "users#create"

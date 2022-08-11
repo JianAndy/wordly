@@ -24,6 +24,9 @@ class UsersController < ApplicationController
 
   def destroy
     session[:user_id] = nil 
+    destroy_game_session
     redirect_to root_path
   end
+
+  
 end
