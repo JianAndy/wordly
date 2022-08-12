@@ -2,13 +2,35 @@
     
 <div class="card">
     <div class="card-body">
-      <h5 class="card-title">SCORECARD</h5>
+      <h5 class="card-title">SCORECARD</h5>      
       <p class="card-text">
 <!-- SCORECARD STARTS HERE  -->
-
-
 <% if session[:user_id] %>
-  <p>you're logged and we'll show you the scorecard<p>
+
+        <%= form_with url: "/games", method: :get do |form| %>
+            <%= form.button "Check Stats" %>
+        <% end %>  
+        
+
+    <% if @user_games.nil? %>
+        <p>No stats available<p>
+    <% elsif %>
+
+    <% @user_games.each do |game| %>
+      <tr><td><%= game.id %></td></tr>
+      <tr><td><%= game.status %></td></tr>
+      <tr><td><%= game.row %></td></tr>
+      <tr><td><%= game.user_id %></td></tr>
+      <tr><td><%= game.created_at %></td></tr>
+      </tr>
+    <% end %>
+  </tbody>
+    <% end %>
+
+
+
+
+
 <% elsif %>  
   <p>you're not logged in</p>
 <% end %>
