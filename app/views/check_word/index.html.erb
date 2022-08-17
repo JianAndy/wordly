@@ -1,5 +1,5 @@
 
-  <div class="card">
+<div class="card">
     <div class="card-body">
        <% if @one_game_per_day == true %>
              <h5 class="card-title">Let's play Wordly</h5>
@@ -29,7 +29,7 @@
     <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5", minlength: "5", pattern: /^(?:([A-Za-z])(?!.*\1))*$/ , oninvalid: "this.setCustomValidity('Enter a 5-unique-letter word')", oninput: "this.setCustomValidity('')" %></li>
     <li class="list-group-item"><%= form.submit "Check" %></li>
      <% elsif %>
-     <% destroy_game_session %>
+      <p>"End game"<p>
      <% end %>
 
     <% end %>

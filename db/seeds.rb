@@ -5,4 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-guest_user = User.create(id: 1,username: "Guest")
+user = User.create(username: "secretuser")
+
+for n in 1..6 do 
+    Game.create(status: true, row: n, user_id: user.id)
+end 
+for n in 1..5 do 
+    Game.create(status: false, row: n, user_id: user.id)
+end 
+
+

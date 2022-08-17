@@ -14,22 +14,27 @@ class CheckWordController < ApplicationController
         @alphabet = alphabet    
         @one_game_per_day = one_game_per_day
 
-        #Saving games when logged in
-       if session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
-       @game 
-       @row = @submitted_word_symbols.last.to_s[4]
-
-        if @check_word == "YOU WON"
-            @game = Game.new(status: true, row: @row , user_id: session[:user_id])
-        elsif
-            @game = Game.new(status: false, row: @row , user_id: session[:user_id])
-        end
-        @game.save
-       end
+        #Saving won/lost games when logged in
+        save_game
 
     end
 
     private
+
+    def save_game
+        if session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
+            @game 
+            @row = @submitted_word_symbols.last.to_s[4]
+
+                if @check_word == "YOU WON"
+                    @game ||= Game.new(status: true, row: @row, user_id: session[:user_id])
+                elsif
+                    @game ||= Game.new(status: false, row: @row, user_id: session[:user_id])
+                end
+                @game.save
+        end
+
+    end 
 
     def submitted_words_count
       words.select { |_, v| v != '' }.count
@@ -55,10 +60,12 @@ class CheckWordController < ApplicationController
         if last_submitted_word[:word] ==  nil
             "GUESS THE WORD"
         elsif last_submitted_word[:word].upcase ==  word_of_the_day
-            session[:game_end_date] = Date.today
+            #session[:game_end_date] = Date.today
+            destroy_game_session
             "YOU WON"
         elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
-            session[:game_end_date] = Date.today
+            #session[:game_end_date] = Date.today
+            destroy_game_session
             "TRY ANOTHER DAY"
         else
            "GUESS ANOTHER WORD"
@@ -112,13 +119,20 @@ class CheckWordController < ApplicationController
     end 
 
     def one_game_per_day
-        if session[:game_end_date].nil?
-            true
-        else 
-            (session[:game_end_date].to_date + 1.day != Date.tomorrow)
+        if session[:user_id].nil?
+            true 
+        elsif
+            @user_games = Game.where(user_id: session[:user_id]) 
+            if @user_games.empty?
+                true
+            elsif 
+                last_date_game = @user_games.last.created_at
+                last_date_game.to_date + 1.day != Date.tomorrow
+            end
         end
-
     end
+
+
 end
 
 #    def one_game_per_day

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/check_word", to: "check_word#index"
 
   get "/logout", to: "users#destroy"
+  get "/games", to: "games#index"
 
   resources :users do
     resources :games
