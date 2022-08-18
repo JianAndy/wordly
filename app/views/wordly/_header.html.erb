@@ -14,9 +14,17 @@
 <% end %>
 
 <% flash.each do |_, message| %>
-  <div class=" alert alert-primary" role="alert">
+  <% if message == "Login can't be empty" %>
+      <small><div class="alert alert-warning" role="alert">
+        <%= message %>
+      </div></small>
+  <% elsif %>
+      <div class="alert alert-primary" role="alert">
     <small><%= message %></small>
-  </div>
+    </div>
+  <% end %>
+
+
 <% end %>
 
 
