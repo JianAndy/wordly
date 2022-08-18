@@ -22,7 +22,7 @@ class CheckWordController < ApplicationController
     private
 
     def save_game
-        if session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
+        if @one_game_per_day && session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
             @game 
             @row = @submitted_word_symbols.last.to_s[4]
 
@@ -60,15 +60,11 @@ class CheckWordController < ApplicationController
         if last_submitted_word[:word] ==  nil
             "GUESS THE WORD"
         elsif last_submitted_word[:word].upcase ==  word_of_the_day
-            #session[:game_end_date] = Date.today
-            destroy_game_session
             "YOU WON"
         elsif last_submitted_word[:word_nr] == :word6 && last_submitted_word[:word] !=  word_of_the_day
-            #session[:game_end_date] = Date.today
-            destroy_game_session
             "TRY ANOTHER DAY"
         else
-           "GUESS ANOTHER WORD"
+           "GUESS ANOTHER WORD"  
         end
     end
 
