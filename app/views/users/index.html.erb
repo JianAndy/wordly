@@ -8,7 +8,10 @@
 
 <% elsif %>
     <%= form_with url: "/users", method: :post do |form| %>
-        <li class="list-group-item"><%= form.text_field :user, minlength: "1" %> <%= form.submit "Login" %></li>
+        <li class="list-group-item">
+        <%= form.text_field :user, :required => true,  pattern: /^\S+/ , oninvalid: "this.setCustomValidity('No blanks spaces allowed')", oninput: "this.setCustomValidity('')" %> 
+        <%= form.submit "Login" %>
+        </li>
     <% end %>
 
 <% end %>
