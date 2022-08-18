@@ -1,10 +1,10 @@
 
 <div class="card">
     <div class="card-body">
-       <% if @one_game_per_day == true %>
-             <h5 class="card-title">Let's play Wordly</h5>
-                 <p class="card-text">
+      <h5 class="card-title">Let's play Wordly</h5>
+          <p class="card-text">
 <!-- GAME CARD STARTS HERE  -->
+
 
 <pre><%= pp @debug_me %></pre>
 <pre><%= pp @one_game_per_day%></pre>
@@ -25,16 +25,16 @@
         <%= form.hidden_field word_symbol, value: @words[word_symbol] %>
       <% end %>
       
-     <% if @check_word == 'GUESS THE WORD' || @check_word == 'GUESS ANOTHER WORD' %>
+     <% if @one_game_per_day && (@check_word == 'GUESS THE WORD' || @check_word == 'GUESS ANOTHER WORD') %>
     <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5", minlength: "5", pattern: /^(?:([A-Za-z])(?!.*\1))*$/ , oninvalid: "this.setCustomValidity('Enter a 5-unique-letter word')", oninput: "this.setCustomValidity('')" %></li>
     <li class="list-group-item"><%= form.submit "Check" %></li>
      <% elsif %>
-      <p>"End game"<p>
+        <pre><b> Next Puzzle: </b><%= time_till_next_game%></pre>
      <% end %>
 
     <% end %>
 
-  <%= @check_word %>
+  <%= @check_word if @one_game_per_day %>
 <br>
 <br>
 
@@ -45,13 +45,12 @@
 </p>
 
 <!-- GAME ALREADY PLAYED -->   
-<% elsif %>
-             <h5 class="card-title">Try another day. </h5>
-<% end %>
 
 <!-- GAME CARD ENDS HERE -->      
       </p>
-      <p class="card-text"><small class="text-muted">placeholder</small></p>
+      <p class="card-text">
+
+      </p>
     </div>
   </div>
 
