@@ -1,5 +1,5 @@
 class CheckWordController < ApplicationController
-    helper_method :check_word_colouring
+    helper_method :check_word_colouring, :show_scorecard
     WORD_SYMBOLS = [:word1, :word2, :word3, :word4, :word5, :word6]
     
     def index
@@ -13,6 +13,8 @@ class CheckWordController < ApplicationController
         @check_word = check_word
         @alphabet = alphabet    
         @one_game_per_day = one_game_per_day
+        
+        
 
         #Saving won/lost games when logged in
         save_game
@@ -20,6 +22,10 @@ class CheckWordController < ApplicationController
     end
 
     private
+
+    def show_scorecard
+        redirect_to check_word_path and return
+    end 
 
     def save_game
         if @one_game_per_day && session[:user_id] && (@check_word == "YOU WON" || @check_word == "TRY ANOTHER DAY")
@@ -125,6 +131,8 @@ class CheckWordController < ApplicationController
                 last_date_game = @user_games.last.created_at
                 last_date_game.to_date + 1.day != Date.tomorrow
             end
+        
+
         end
     end
 
