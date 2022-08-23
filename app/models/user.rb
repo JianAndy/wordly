@@ -7,40 +7,38 @@ class User < ApplicationRecord
     def self.personal_stats(id)
         @games = Game.where(user_id: id)
 
-        ### calculating strokes -BEGINING
-        status_array = [] 
-
-        @games.each do |game|
-            status_array.append(game.status)
-        end 
-
-        groups_of_true_statuses = []
-        n = 0 
-
-        status_array.each do |status|
-            if status == true 
-            groups_of_true_statuses[n] = 0 if groups_of_true_statuses[n].nil?
-            groups_of_true_statuses[n] +=1 
-            elsif 
-            n += 1 
-            end
-        end 
-        
-        streak_stats = groups_of_true_statuses.compact
-            
-        streak_stats = {
-        :max => streak_stats.max , 
-        :last => streak_stats.last
-        }
-        ### calculating strokes -END
-
-
         if @games.empty?
             ["No game stats"]
         elsif 
+
+            ### calculating strokes -BEGINING
+            status_array = [] 
+
+            @games.each do |game|
+                status_array.append(game.status)
+            end 
+            groups_of_true_statuses = []
+            n = 0 
+            status_array.each do |status|
+                if status == true 
+                groups_of_true_statuses[n] = 0 if groups_of_true_statuses[n].nil?
+                groups_of_true_statuses[n] +=1 
+                elsif 
+                n += 1 
+                end
+            end 
+            
+            streak_stats = groups_of_true_statuses.compact                
+            streak_stats = {
+            :max => streak_stats.max , 
+            :last => streak_stats.last
+            }
+            ### calculating strokes -END
+
             @games_count = @games.length
             @games_won =  @games.where(status: true)
             @win_ratio =  (@games_won.length * 100) / @games_count
+            
 
         {
             "Played" => @games_count,
