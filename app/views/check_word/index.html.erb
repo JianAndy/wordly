@@ -4,10 +4,8 @@
       <h5 class="card-title">Let's play Wordly</h5>
           <p class="card-text">
 <!-- GAME CARD STARTS HERE  -->
-
-
-<pre><%= pp @debug_me %></pre>
-<pre><%= pp @one_game_per_day%></pre>
+<pre><%= pp @debug_me if @logged_as_secretuser %></pre>
+<pre><%= pp @one_game_per_day if @logged_as_secretuser%></pre>
     <%= form_with url: "/check_word", method: :get do |form| %>
 
       <% @submitted_word_symbols.each do |word_symbol| %>

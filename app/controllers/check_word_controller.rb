@@ -13,6 +13,7 @@ class CheckWordController < ApplicationController
         @check_word = check_word
         @alphabet = alphabet    
         @one_game_per_day = one_game_per_day
+        @logged_as_secretuser = logged_as_secretuser
         
         
 
@@ -22,6 +23,19 @@ class CheckWordController < ApplicationController
     end
 
     private
+
+    def logged_as_secretuser
+       if session[:user_id].nil?
+        false 
+       elsif
+        @user = User.find_by(id: session[:user_id])
+            if @user.username == "secretuser"
+                true
+            elsif 
+                false
+            end                
+       end
+    end 
 
     def show_scorecard
         redirect_to check_word_path and return
