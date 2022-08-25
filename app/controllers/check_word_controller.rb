@@ -77,7 +77,7 @@ class CheckWordController < ApplicationController
     end
 
     def check_word
-        if last_submitted_word[:word] ==  nil
+        if last_submitted_word[:word] ==  nil 
             "GUESS THE WORD"
         elsif last_submitted_word[:word].upcase ==  word_of_the_day
             "YOU WON"

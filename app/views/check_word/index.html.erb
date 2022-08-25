@@ -26,16 +26,17 @@
      <% if @one_game_per_day && (@check_word == 'GUESS THE WORD' || @check_word == 'GUESS ANOTHER WORD') %>
     <li class="list-group-item"><%= form.text_field @next_word_symbol, maxlength: "5", minlength: "5", pattern: /^(?:([A-Za-z])(?!.*\1))*$/ , oninvalid: "this.setCustomValidity('Enter a 5-unique-letter word')", oninput: "this.setCustomValidity('')" %></li>
     <li class="list-group-item"><%= form.submit "Check" %></li>
-     <% elsif %>        
+     <% elsif %>    
+        <p>Word of the day was: <b> <%= @debug_me %> </b></p>    
         <pre><b> Next Puzzle: </b><%= time_till_next_game%></pre>
         <% @one_game_per_day = false %>
      <% end %>
 
     <% end %>
 
-  <%= @check_word if @one_game_per_day  %>
-<br>
-<br>
+
+  <%= @check_word if @one_game_per_day   %>
+
 
 <p>
   <% for letter,colour in @alphabet do  %>

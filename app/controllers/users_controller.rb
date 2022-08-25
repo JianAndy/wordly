@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   end
   
   def create
-
+    
+    destroy_game_session
     @user = User.find_by(username: params["user"])
       
       if @user.nil?
